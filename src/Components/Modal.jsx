@@ -1,29 +1,13 @@
 import React, { useState } from "react";
-import Modal from "react-modal";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
+import "./Modal.css";
 
 const ModalCreated = () => {
-  const [openForm, setOpenForm] = useState(false);
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modal, setModal] = useState(false);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
-  function closeModal() {
-    setIsOpen(false);
-  }
   const handleSubmit = (event) => {
     event.preventDefault();
     let flag = true;
@@ -45,20 +29,20 @@ const ModalCreated = () => {
       document.getElementById("myForm").reset();
     }
   };
+  const handleOutsideClick = (e) => {
+    if (e.target.className === "modal") {
+      toggleModal();
+    }
+  };
   return (
     <>
       <h1>User Details Modal</h1>
-      <button type="button" class="btn btn-primary" onClick={openModal}>
+      <button type="button" class="btn btn-primary" onClick={toggleModal}>
         Open Form
       </button>
-      <div className="modal">
-        <div className="modal-content">
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
+      {modal && (
+        <div className="modal" onClick={handleOutsideClick}>
+          <div className="modal-content">
             <form
               id="myForm"
               style={{
@@ -87,9 +71,9 @@ const ModalCreated = () => {
                 Submit
               </button>
             </form>
-          </Modal>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
