@@ -51,14 +51,16 @@ const ModalCreated = () => {
       <button type="button" class="btn btn-primary" onClick={openModal}>
         Open Form
       </button>
-      <div className="modal">
-        <div className="modal-content">
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        {" "}
+        <div className="modal">
+          <div className="modal-content">
             <form
               id="myForm"
               style={{
@@ -87,9 +89,9 @@ const ModalCreated = () => {
                 Submit
               </button>
             </form>
-          </Modal>
+          </div>
         </div>
-      </div>
+      </Modal>
     </>
   );
 };
